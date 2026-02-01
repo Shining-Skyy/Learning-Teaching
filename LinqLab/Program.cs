@@ -6,7 +6,7 @@ namespace LinqLab
     {
         static void Main(string[] args)
         {
-            NamedMethodRun.Run();
+            PredicateRun.Run();
         }
     }
 }
