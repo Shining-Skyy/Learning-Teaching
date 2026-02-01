@@ -1,4 +1,4 @@
-﻿using System;
+﻿using LinqLab.Lessons.NamedMethods;
 
 namespace LinqLab
 {
@@ -6,7 +6,7 @@ namespace LinqLab
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            NamedMethodRun.Run();
         }
     }
 }
