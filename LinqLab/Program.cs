@@ -1,4 +1,5 @@
 ﻿using LinqLab.Lessons.NamedMethods;
+using LinqLab.Lessons.Queries;
 
 namespace LinqLab
 {
@@ -6,7 +7,8 @@ namespace LinqLab
     {
         static void Main(string[] args)
         {
-            PredicateRun.Run();
+            //PredicateRun.Run();
+            FilteringRun.Run();
         }
     }
 }
