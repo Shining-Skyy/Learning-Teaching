@@ -22,5 +22,20 @@ namespace LinqLab.Data
 
             return cources;
         }
+
+        public static List<Team> GetTeam()
+        {
+            List<Team> teams = new List<Team>()
+            {
+                new Team { Name = "Perspolis", Country = "Iran"},
+                new Team { Name = "Esteghlal", Country = "Iran"},
+                new Team { Name = "Psg", Country = "France"},
+                new Team { Name = "Arsenal", Country = "England"},
+                new Team { Name = "Manchester", Country = "England"},
+                new Team { Name = "Real Madrid", Country = "Spain"}
+            };
+
+            return teams;
+        }
     }
 }
