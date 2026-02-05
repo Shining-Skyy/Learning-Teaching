@@ -8,7 +8,8 @@ namespace LinqLab
         static void Main(string[] args)
         {
             //PredicateRun.Run();
-            FilteringRun.Run();
+            //FilteringRun.Run();
+            SortingRun.Run();
         }
     }
 }
