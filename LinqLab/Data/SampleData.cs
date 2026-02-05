@@ -1,4 +1,5 @@
-﻿using LinqLab.Models;
+﻿using LinqLab.Dto;
+using LinqLab.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,31 @@ namespace LinqLab.Data
             new Product { Id = 4, CategoryId = 2, Name = "Dell" },
         };
 
+        //Change the selection training
+        private static readonly List<Category> categoriesWithProducts = new()
+        {
+            new Category
+            {
+                Id = 1,
+                Name = "Mobile",
+                Products = new List<Product>()
+            {
+                new Product { Id = 1, CategoryId = 1, Name = "Iphone", InsertDate = DateTime.Now.AddYears(-1) },
+                new Product { Id = 2, CategoryId = 1, Name = "Sumsoung", InsertDate = DateTime.Now.AddYears(-8) },
+            }
+            },
+            new Category
+            {
+                Id = 2,
+                Name = "LapTop",
+                Products = new List<Product>()
+            {
+                new Product { Id = 3, CategoryId = 2, Name = "Hp", InsertDate = DateTime.Now },
+                new Product { Id = 4, CategoryId = 2, Name = "Dell", InsertDate = DateTime.Now.AddYears(-15) },
+            }
+            },
+        };
+
         // Returns products with their category name (Inner Join)
         public static IEnumerable<dynamic> GetProductsWithCategory()
         {
@@ -74,6 +100,34 @@ namespace LinqLab.Data
                 p => p.CategoryId,
                 (category, productGroup) =>
                     (category.Id, category.Name, productGroup));
+        }
+
+        // Demonstrates LINQ projection using Select by mapping joined data into a DTO
+        public static IEnumerable<dynamic> GetProductWithCategorySelect()
+        {
+            return Products.Join(Categories,
+                p => p.CategoryId,
+                c => c.Id,
+                (product, category) => new ProductWithCategoryDto
+                {
+                    Id = product.Id,
+                    ProductName = product.Name,
+                    CategoryName = category.Name
+                });
+        }
+
+        // Demonstrates LINQ projection using SelectMany with filtering and mapping
+        public static IEnumerable<dynamic> GetProductWithCategorySelectMany()
+        {
+            return categoriesWithProducts
+                .SelectMany(c => c.Products
+                .Where(p => p.InsertDate.Year < 2020)
+                .Select(i => new
+                {
+                    CategoryName = c.Name,
+                    ProductName = i.Name,
+                    Year = i.InsertDate.Year
+                }));
         }
     }
 }

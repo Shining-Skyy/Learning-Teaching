@@ -11,7 +11,8 @@ namespace LinqLab
             //FilteringRun.Run();
             //SortingRun.Run();
             //GroupingRun.Run();
-            JoinRun.Run();
+            //JoinRun.Run();
+            ProjectionRun.Run();
         }
     }
 }

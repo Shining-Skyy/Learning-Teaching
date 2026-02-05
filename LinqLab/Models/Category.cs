@@ -10,5 +10,8 @@ namespace LinqLab.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        //Change the selection training
+        public List<Product> Products { get; set; }
     }
 }
