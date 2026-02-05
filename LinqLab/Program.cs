@@ -10,7 +10,8 @@ namespace LinqLab
             //PredicateRun.Run();
             //FilteringRun.Run();
             //SortingRun.Run();
-            GroupingRun.Run();
+            //GroupingRun.Run();
+            JoinRun.Run();
         }
     }
 }

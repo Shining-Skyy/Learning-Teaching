@@ -37,5 +37,43 @@ namespace LinqLab.Data
 
             return teams;
         }
+
+        private static readonly List<Category> Categories = new()
+        {
+            new Category { Id = 1, Name = "Mobile" },
+            new Category { Id = 2, Name = "LapTop" }
+        };
+
+        private static readonly List<Product> Products = new()
+        {
+            new Product { Id = 1, CategoryId = 1, Name = "Iphone" },
+            new Product { Id = 2, CategoryId = 1, Name = "Sumsoung" },
+            new Product { Id = 3, CategoryId = 2, Name = "Hp" },
+            new Product { Id = 4, CategoryId = 2, Name = "Dell" },
+        };
+
+        // Returns products with their category name (Inner Join)
+        public static IEnumerable<dynamic> GetProductsWithCategory()
+        {
+            return Products.Join(Categories,
+                p => p.CategoryId,
+                c => c.Id,
+                (product, category) => new
+                {
+                    ProductId = product.Id,
+                    ProductName = product.Name,
+                    CategoryName = category.Name
+                });
+        }
+
+        // Returns categories with their list of products (Group Join / Left Join style)
+        public static IEnumerable<(int CategoryId, string CategoryName, IEnumerable<Product> Products)> GetCategoriesWithProducts()
+        {
+            return Categories.GroupJoin(Products,
+                c => c.Id,
+                p => p.CategoryId,
+                (category, productGroup) =>
+                    (category.Id, category.Name, productGroup));
+        }
     }
 }
